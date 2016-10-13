@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task4</title>
+    <style>
+        body{
+            display: flex;
+            height: 700px;
+        }
+        .rectangle{
+            box-sizing: border-box;
+            align-self: center;
+            height: 200px;
+            width: 400px;
+            background: #ccc;
+            margin: auto auto;
+            position: relative;
+        }
+        .sector:first-child{
+            height: 50px;
+            width: 50px;
+            border-radius: 0 0 50px 0;
+            background: #fc0;
+        }
+        .sector:last-child{
+            height: 50px;
+            width: 50px;
+            border-radius: 50px 0 0 0;
+            background: #fc0;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+
+        }
+    </style>
+</head>
+<body>
+<div class="rectangle">
+    <div class="sector"></div>
+    <div class="sector"></div>
+</div>
+
+
+</body>
+</html>
