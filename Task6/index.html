@@ -197,6 +197,7 @@
         .bottom{
             clear: both;
             margin-top: 20px ;
+            overflow: hidden;
         }
         .bottom-left{
             width: 415px;
@@ -257,18 +258,101 @@
             width: 458px;
             float: left;
             margin-left: 17px;
-            margin-top: 85px;
+            margin-top: 60px;
+            position: relative;
         }
         .bottom-right img{
             width: 458px;
             height: 275px;
         }
+        .picture2-block{
+            background-color: rgba(4,0,0,0.4);
+            width: 458px;
+            height: 61px;
+            position: absolute;
+            top:214px;
+        }
+        .picture2-block hr{
+            width: 3px;
+            height: 44px;
+            background:#72b16a;
+            border: none;
+            margin: 9px 5px 5px 30px;
+        }
+        .picture2-block p{
+            font-size: 26px;
+            color: white;
+            font-family: "微软雅黑";
+            position: absolute;
+            top:20px;
+            left: 43px;
+        }
+        .picture2-block p span{
+            font-size: 12px;
+            color: #72b16a;
+            font-style: italic;
+            margin-left: 10px;
+            /*letter-spacing: 140%;*/
+            vertical-align: bottom;
+        }
         .right-block{
+            box-sizing: border-box;
             width: 459px;
             height: 318px;
             background: #eeedd6;
             margin-top: 20px;
             position: relative;
+            padding-top: 30px;
+        }
+        .right-block ul{
+            margin-left: 50px;
+            list-style-image: url("list_icon.png");
+            font-size: 16px;
+            color: #5a5b5b;
+            text-align: left;
+            font-family: "宋体";
+            line-height: 30px;
+
+        }
+        .right-block ul li{
+            position: relative;
+        }
+        .right-block ul span{
+            font-size: 12px;
+            position: absolute;
+            right: 20px;
+            font-style: italic;
+        }
+
+        .right-block-text{
+            width: 175px;
+            float: right;
+            font-family: "黑体";
+            font-size: 14px;
+            color: #5a5b5b;
+            line-height: 16px;
+            font-style: italic;
+            position: relative;
+            text-indent: 2em;
+            top:60px;
+        }
+        .right-block-text span{
+            font-size: 72px;
+            color: #d45d5c;
+            position: absolute;
+            font-style: normal;
+        }
+        .right-block-text span.mark-one{
+            left: 0;
+            margin-top:10px;
+            margin-left:-70px;
+            margin-right: 50px ;
+        }
+        .right-block-text span.mark-two{
+            right: 0;
+            bottom: -30px;
+            margin-top:100px;
+            margin-right: -20px ;
         }
         .left-bottom-block{
             width: 260px;
@@ -280,23 +364,54 @@
             position: absolute;
             bottom: 0;
         }
-        .right-block-text{
-            width: 180px;
-            float: right;
-        }
-        .right-block-text .text{
+        .left-bottom-block-text1{
+            font-family: "微软雅黑";
+            font-size: 110px;
+            margin-top: 85px;
+            margin-left: 10px;
 
-            font-size: 14px;
-            color: #5a5b5b;
+        }
+        .left-bottom-block hr{
+            height: 86px;
+            width: 2px;
+            background: white;
+            border: none;
+            margin-left: 80px;
+            margin-top: -50px;
+        }
+        .left-bottom-block-text2{
+            position: absolute;
+            top: 50px;
+            left: 90px;
             font-family: "黑体";
-            line-height: 16px;
+
+        }
+        .left-bottom-block-text21{
+            line-height: 24px;
             font-style: italic;
+            font-size: 21px;
         }
-        .right-block-text span{
-            font-family: "黑体";
-            font-size: 72px;
+        .left-bottom-block-text22{
+            font-size: 12px;
+            line-height: 12px;
+        }
+
+        /*footer*/
+        footer hr{
+            width: 892px;
+            height: 1px;
+            background: #938e8c;
+            border: none;
+            margin-top: 50px;
+        }
+        footer p{
             color: #d45d5c;
+            font-size: 12px;
+            font-family: "黑体";
+            text-align: right;
+            margin-top: 5px;
         }
+
     </style>
 </head>
 <body>
@@ -348,8 +463,7 @@
     <div class="bottom">
         <div class="bottom-left">
             <p>
-                <span class="left-title1">THE</span>
-                <span class="left-title2" >TECHNOLOGE OF FRONT</span>
+                <span class="left-title1">THE</span><span class="left-title2" >TECHNOLOGE OF FRONT</span>
             </p>
             <p class="left-title3">前端技术领域</p>
             <hr>
@@ -361,28 +475,35 @@
         </div>
         <div class="bottom-right">
             <img src="picture2.png">
+            <div class="picture2-block">
+                <hr><p>前端技术<span>前端技术前端技术</span></p>
+            </div>
             <div class="right-block">
                 <ul>
-                    <li>前端前端前端前端前端前端  ...................................................<span>前端</span></li>
-                    <li>前端前端前端前  .....................................................................<span>前端前</span></li>
-                    <li>前端前端前端前端前端前端前端  ......................................... <span>前端</span></li>
+                    <li>前端前端前端前端前端前端 .....................................<span>前端</span></li>
+                    <li>前端前端前端前 .....................................................<span>前端前</span></li>
+                    <li>前端前端前端前端前端前端前端 .............................. <span>前端</span></li>
                 </ul>
                 <div class="left-bottom-block">
                     <p class="left-bottom-block-text1">0</p>
                     <hr>
-                    <p class="left-bottom-block-text2">ONE TWO THREE FORE FIVE</p>
-                    <p class="left-bottom-block-text3">hello world hello world hello word</p>
+                    <div class="left-bottom-block-text2">
+                        <p class="left-bottom-block-text21">ONE TWO<br>THREE FORE FIVE<br>
+                        <p class="left-bottom-block-text22">hello world hello world hello word</p>
+                    </div>
                 </div>
                 <p class="right-block-text">
-                <span>"</span>
-                    <span class="text">world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello</span>
-                    <span>"</span>
+                    <span class="mark-one">“</span>
+                    world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello
+                    <span class="mark-two">”</span>
                 </p>
             </div>
         </div>
     </div>
 </article>
 <footer>
+    <hr>
+    <p>ife.baidu.com</p>
 </footer>
 </body>
 </html>
