@@ -95,3 +95,10 @@ function sortDown(x,y){
 }
 Array.sort(sortDown)
 ````
+###Task15
+####NodeList遍历
+首选`for`循环，如特别复杂将其转换为Array。(IE中不可用)
+```
+var div_list = document.querySelectorAll('div'); // 返回 NodeList
+var div_array = Array.prototype.slice.call(div_list); // 将 NodeList 转换为数组
+```
