@@ -64,3 +64,12 @@
 | order | order: *number*|initial|inherit; | 设置**内部item**的顺序 |
 | align-self | align-self: stretch/center/flex-start/flex-end/baseline/initial/inherit; | 设置**内部item**的对齐方式，覆盖父级元素的设置 |
 | flex | flex: *flex-grow*增加多少倍 *flex-shrink*缩小多少倍 *flex-basis*增加‘px’/auto/initial/inherit; | 设置**内部item**的宽度，按照比例分配剩余空间，设置flex-basis，相当于设置宽度，分配的剩余空间要减去这部分 |
+###Task7
+####Select标签实现placeholder功能
+````
+<select>
+    <option value="" disabled selected style="display: none;">Please Choose</option>
+    <option value="0">Open when powered (most valves do this)</option>
+    <option value="1">Closed when powered, auto-opens when power is cut</option>
+</select>
+````
