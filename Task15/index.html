@@ -96,6 +96,9 @@
         var aqiData = getData();
         aqiData = sortAqiData(aqiData);
         render(aqiData);
+        var btn=document.getElementById("sort-btn");
+        btn.disabled=true;
+
     }
 
 
