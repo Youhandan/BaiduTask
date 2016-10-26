@@ -73,3 +73,25 @@
     <option value="1">Closed when powered, auto-opens when power is cut</option>
 </select>
 ````
+###Task13
+####封装jQuery类似函数
+```
+ var $ = function (id) {
+	  return document.getElementById(id);
+  }
+  ```
+###Task14
+####sort二维数组排序
+根据某一列进行排序
+````
+function sortUp(x,y){
+    return x[i]-y[i]
+}
+Array.sort(sortUp)
+
+
+function sortDown(x,y){
+    return y[i]-x[i]
+}
+Array.sort(sortDown)
+````
