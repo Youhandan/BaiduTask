@@ -139,6 +139,9 @@ function clearList() {
     }
 
 }
+
+暴力法
+tableNode.innerHTML="";
 ```
 ####Dataset作用（自定义属性访问）
 在属性名前加“data-”，在dataset中可访问到。    
