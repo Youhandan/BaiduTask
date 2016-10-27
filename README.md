@@ -102,3 +102,44 @@ Array.sort(sortDown)
 var div_list = document.querySelectorAll('div'); // 返回 NodeList
 var div_array = Array.prototype.slice.call(div_list); // 将 NodeList 转换为数组
 ```
+###Task16
+####js脚本放在head和body中的区别
+浏览器解析html是从上到下的。  
+如果把javascript放在head里的话，则先被解析,但这时候body还没有解析，所以会返回空值。一般都会绑定一个监听，当全部的html文档解析完之后，再执行代码：
+````
+   windows.onload=function(){
+       //这里放入执行代码
+   }
+   ````
+说明:  
+放在head中的JS代码会在页面加载完成之前就读取，而放在body中的JS代码，会在整个页面加载完成之后读取。  
+这就说明了，如果我们想定义一个全局对象，而这个对象是页面中的某个按钮时，我们必须将其放入body中，道理很明显：如果放入head，那当你定义的时候，那个按钮都没有被加载，可能获得的是一个undefind。  
+####JS事件代理机制
+当多个元素需要绑定同一个事件时，可在其父辈元素上绑定该事件，通过事件冒泡，父元素接收到该事件event，可对event进行操作，判断是否为目标元素，然后再执行事件。  
+```
+document.getElementById("parentlist").addEventListener("click",function(e){
+if(e.target&& e.target.Nodename=="BUTTON"){
+demo(e)}
+});
+````
+为父节点添加一个click事件，当子节点被点击的时候，click事件会从子节点开始向上冒泡。父节点捕获到事件之后，通过判断e.target.nodeName来判断是否为我们需要处理的节点。并且通过e.target拿到了被点击的Li节点。从而可以获取到相应的信息，并作处理。
+####判断一个对象是否为空（没有自有属性）
+```
+var obj = {};
+  Object.getOwnPropertyNames(obj).length; //Object.keys(obj).length
+  
+  //先用原型对象的方式获取obj的key值组成的数组，在利用数组的length属性来判断
+  ````
+####JS清空某个节点的所有后代节点
+```
+function clearList() {
+    var tableNode=document.getElementById("aqi-table");
+    while( tableNode.hasChildNodes()){
+        tableNode.removeChild(tableNode.firstChild);
+    }
+
+}
+```
+####Dataset作用（自定义属性访问）
+在属性名前加“data-”，在dataset中可访问到。    
+dataset属性的值是DOMStringMap的一个实例，名值对的映射。每个data-name形式的属性都有一个对应的属性。
