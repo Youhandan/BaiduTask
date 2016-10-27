@@ -145,4 +145,8 @@ tableNode.innerHTML="";
 ```
 ####Dataset作用（自定义属性访问）
 在属性名前加“data-”，在dataset中可访问到。    
-dataset属性的值是DOMStringMap的一个实例，名值对的映射。每个data-name形式的属性都有一个对应的属性。
+dataset属性的值是DOMStringMap的一个实例，名值对的映射。每个data-name形式的属性都有一个对应的属性。  
+###Task8
+####Sass注意事项
+`@for`循环中，`$i from 1 to 12`不包括12，`$i from 1 through 12`包含12  
+`100% / 12 * $i`已经把屏幕分割完了，要设置间距用padding

@@ -1,3 +1,5 @@
 # ignore idea file
 .idea/
 *.iml
+/Task8/style.css.map
+/Task8/.sass-cache/
