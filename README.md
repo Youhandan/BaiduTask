@@ -150,3 +150,16 @@ dataset属性的值是DOMStringMap的一个实例，名值对的映射。每个d
 ####Sass注意事项
 `@for`循环中，`$i from 1 to 12`不包括12，`$i from 1 through 12`包含12  
 `100% / 12 * $i`已经把屏幕分割完了，要设置间距用padding
+###Task17
+####Date对象常用方法
+1. 获取年份`y=Date.getFullYear()`(从 Date 对象以四位数字返回年份)
+2. 获取月份`m=Date.getMonth()`（0~11）
+3. 获取日期`d=Date.getDate()`（1~31）
+4. 获取周数`w=Date.getDay()`（0~6）
+5. 获取小时`h=Date.getHours()`（0~23）
+6. 获取分钟`min=Date.getMinutes()`（0~59）
+7. 获取秒数`sec=Date.getSeconds()`（0~59）
+####Select对象常用操作
+1. Select有一个`options[]`的数组，它包含所有的option选项，引索值从0开始
+2. 如果把 options.length 属性设置为 0,Select 对象中所有选项都会被清除；如果 options.length 属性的值比当前值小，出现在数组尾部的元素就会被丢弃；如果把 options[] 数组中的一个元素设置为 null，那么选项就会从 Select 对象中删除；可以通过构造函数 Option() 来创建一个新的 option 对象（需要设置 options.length 属性）
+3. Select对象方法，`add(option,before)`,`remove(index)`,option常用的属性有text、index、selected、disabled，text即选项文本，index为在select中的排序，当`add(option,null)`时在select列表末尾增加
