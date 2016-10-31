@@ -58,6 +58,20 @@ var pageState = {
  * 渲染图表
  */
 function renderChart() {
+    var cities=Object.keys(aqiSourceData);
+    var city=cities[pageState["nowSelectCity"]];
+    var showWay=pageState["nowGraTime"];
+    var chart=document.getElementById("chart");
+    var divNum=Object.keys(chartData[city][showWay]).length;
+    var divWidth=(chart.clientWidth-100)/divNum;
+    for(var ele in chartData[city][showWay]){
+        var div=document.createElement("div");
+        div.style.height=chartData[city][showWay][ele]+"px";
+        div.style.float="left";
+        div.style.border="1px solid black";
+        div.style.width=divWidth+"px";
+        chart.appendChild(div);
+    }
 
 }
 
@@ -71,10 +85,8 @@ function graTimeChange() {
         // 设置对应数据
         pageState["nowGraTime"]=selectedTime;
         // 调用图表渲染函数
-        renderChart()
+        renderChart();
     }
-
-
 
 }
 
@@ -126,46 +138,49 @@ function initAqiChartData() {
     // 将原始的源数据处理成图表需要的数据格式
     // 处理好的数据存到 chartData 中
     //获取选择的城市数据
-    var cities=Object.keys(aqiSourceData);
-    var selectedCity=cities[pageState["nowSelectCity"]];
-    var selectedCityData=aqiSourceData[selectedCity];
-    var fullDateStrArr=Object.keys(selectedCityData);
-    switch (pageState["nowGraTime"]){
-        case "day":{
-            chartData=selectedCityData;
-            break
+    var charDataKeys=Object.keys(aqiSourceData);
+    charDataKeys.forEach(function (e) {
+        chartData[e]={};
+        chartData[e]["day"]=aqiSourceData[e];
+        chartData[e]["week"]=calculateByWeek(aqiSourceData[e]);
+        chartData[e]["month"]=calculateByMonth(aqiSourceData[e]);
+    });
+
+
+//按月份计算数据
+    function calculateByMonth(cityData) {
+        var monthData={};
+        var cityDataKeys=Object.keys(cityData);
+        var dayByMonth=groupMonths(cityDataKeys);
+        for(var m in dayByMonth){
+            var sum=0;
+            var aver=0;
+            dayByMonth[m].forEach(function (e) {
+                sum+=cityData[e];
+            });
+            aver=sum/dayByMonth[m].length;
+            monthData["2016年"+m+"月"]=aver;
         }
-        case "month":{
-            var dayByMonth=groupMonths(fullDateStrArr);
-            for(var m in dayByMonth){
-                var sum=0;
-                var aver=0;
-                var charDataKey="2016年"+m+"月";
-                dayByMonth[m].forEach(function (e) {
-                    sum+=selectedCityData[e];
-                });
-                aver=sum/dayByMonth[m].length;
-                chartData[charDataKey]=aver;
-            }
-            break
-        }
-        case "week":{
-            var dayByWeek=groupWeeks(fullDateStrArr);
-            for(var n in dayByWeek){
-                var sum=0;
-                var aver=0;
-                var charDataKey=n;
-                dayByMonth[n].forEach(function (e) {
-                    sum+=selectedCityData[e];
-                });
-                aver=sum/dayByMonth[n].length;
-                chartData[charDataKey]=aver;
-            }
-        }
+        return monthData
+
     }
 
-
-
+    //按周计算数据
+    function calculateByWeek(cityData) {
+        var weekData={};
+        var cityDataKeys=Object.keys(cityData);
+        var dayByWeek=groupWeeks(cityDataKeys);
+        for(var n in dayByWeek){
+            var sum=0;
+            var aver=0;
+            dayByWeek[n].forEach(function (e) {
+                sum+=cityData[e];
+            });
+            aver=sum/dayByWeek[n].length;
+            weekData[n]=aver;
+        }
+        return weekData
+    }
 
 //按月份将日期分组
     function groupMonths(fullDateStrArr) {
@@ -185,40 +200,15 @@ function initAqiChartData() {
     }
     //按周将日期分组
     function groupWeeks(fullDateStrArr) {
-        var weeks={};
-        var firstDay=new Date(fullDateStrArr[0]);
-        var beginWeekDay=firstDay.getDay();
-
-        if(beginWeekDay==0){
-            var restDays=fullDateStrArr.length%7;
-            var weekCount=0;
-            for(var i=0;i<fullDateStrArr.length;i+7){
-                weekCount++;
-                var weekStr="2016年第"+weekCount+"周";
-                weeks[weekStr]=fullDateStrArr.slice(i,i+7);
-            }
-            if(restDays!==0){
-                weekCount++;
-                var weekStr="2016年第"+weekCount+"周";
-                weeks[weekStr]=fullDateStrArr.slice(7*(weekCount-1));
-            }
-        }
-        else{
-            var weekCount=1;
-            var firstWeekDays=6-beginWeekDay;
-            var restDays=(fullDateStrArr.length-firstWeekDays)%7;
-            var weekStr="2016年第"+weekCount+"周";
-            weeks[weekStr]=fullDateStrArr.slice(0,firstWeekDays);
-            for(var i=firstWeekDays;i<fullDateStrArr.length;i+7){
-                weekCount++;
-                var weekStr="2016年第"+weekCount+"周";
-                weeks[weekStr]=fullDateStrArr.slice(i,i+7);
-            }
-            if(restDays!==0){
-                weekCount++;
-                var weekStr="2016年第"+weekCount+"周";
-                weeks[weekStr]=fullDateStrArr.slice(7*(weekCount-1));
-            }
+        var weeks = {};
+        var firstDay = new Date(fullDateStrArr[0]);
+        var beginWeekDay = firstDay.getDay();
+        var weekCount = 1;
+        var firstWeekDays = 6 - beginWeekDay;
+        weeks["2016年第" + weekCount + "周"] = fullDateStrArr.slice(0, firstWeekDays);
+        for (var i = firstWeekDays; i < fullDateStrArr.length; i += 7) {
+            weekCount++;
+            weeks["2016年第" + weekCount + "周"] = fullDateStrArr.slice(i, i + 7);
         }
         return weeks
     }
@@ -231,6 +221,7 @@ function init() {
     initGraTimeForm();
     initCitySelector();
     initAqiChartData();
+    renderChart();
 }
 
 init();
