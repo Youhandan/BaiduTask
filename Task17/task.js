@@ -58,20 +58,67 @@ var pageState = {
  * 渲染图表
  */
 function renderChart() {
+    //数组sort()排序传的参数为该函数（降序排列），绘制柱状图需要
+
+    function compare(value1, value2) {
+        return value2 - value1;
+    }
+    function removeAllChildNodes() {
+        var chart=document.getElementById("chart");
+        while (chart.hasChildNodes()){
+            chart.removeChild(chart.firstChild);
+        }
+    }
+
     var cities=Object.keys(aqiSourceData);
     var city=cities[pageState["nowSelectCity"]];
     var showWay=pageState["nowGraTime"];
-    var chart=document.getElementById("chart");
-    var divNum=Object.keys(chartData[city][showWay]).length;
-    var divWidth=(chart.clientWidth-100)/divNum;
+    var value=[];
+    var labels=[];
     for(var ele in chartData[city][showWay]){
+        value.push(chartData[city][showWay][ele]);
+        labels.push(ele);
+    }
+    var chart=document.getElementById("chart");
+    var myWidth = chart.clientWidth,
+        myHeight = chart.clientHeight,
+        bDistance = 20,
+        len = labels.length,
+    //矩形宽度
+        bWidth = Math.floor((myWidth - bDistance * 2) / len),
+        bHeight = myHeight - bDistance * 2,//边框高度
+        sortValue = value.slice(0),
+        serialValues = [];
+    sortValue.sort(compare);
+    if (sortValue[0] > bHeight) {
+        (function () {
+            for (var i = 0; i < len; i++) {
+                serialValues[i] = value[i] * bHeight / sortValue[0];
+            }
+
+        })()
+    }
+    else{
+        serialValues=value;
+    }
+    var color=["red","yellow","blue","green"];
+    removeAllChildNodes();
+    chart.addEventListener("mouseover",function (e) {
+
+    });
+    //绘制矩形，组成条形图
+    for (var i = 0; i < len; i++) {
+        var fillStyle=color[i%4];//随机生成颜色
         var div=document.createElement("div");
-        div.style.height=chartData[city][showWay][ele]+"px";
-        div.style.float="left";
-        div.style.border="1px solid black";
-        div.style.width=divWidth+"px";
+        div.style.height=serialValues[i]+"px";
+        div.style.width= bWidth+"px";
+        div.style.background=fillStyle;
+        div.style.position="absolute";
+        div.style.bottom=0;
+        div.style.left=bWidth*i+bDistance;
         chart.appendChild(div);
     }
+
 
 }
 
